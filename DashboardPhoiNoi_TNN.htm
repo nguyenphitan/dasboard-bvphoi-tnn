@@ -1,0 +1,654 @@
+<script type="text/javascript" src="../common/script/main.js"></script>
+<script type="text/javascript" src="{menuJS}"></script>
+<input type="hidden" name="company_id" id="company_id" value="{company_id}" />
+<input type="hidden" name="user_id" id="user_id" value="{user_id}" />
+<script type="text/javascript" src="../common/script/RestService.js"></script>
+<script type="text/javascript" src="../common/script/CommonUtil.js"></script>
+<script type="text/javascript" src="../common/script/dbForm.js"></script>
+<script type="text/javascript" src="../common/script/dbToolbar.js"></script>
+<script type="text/javascript" src="../common/script/DataValidator.js"></script>
+<script type="text/javascript" src="../common/script/jquery/jquery.toaster.js"></script>
+<script type="text/javascript" src="../common/script/jsdatetime/Scripts/DateTimePicker.js"></script>
+<script type="text/javascript" src="../common/script/jquery/jquery.mask-plugin.min.js"></script>
+<script type="text/javascript" src="../common/script/bootstrap/bootstrap3-typeahead.min.js"></script>
+<link rel="stylesheet" href="../common/css/font-awesome.min.css" />
+<link rel="stylesheet" href="../common/script/bootstrap/css/bootstrap.min.css" />
+<link rel="stylesheet" href="../common/css/custom.css" />
+<link href="../common/script/jqueryui/jquery-ui-redmond.1.9.1.css" rel="stylesheet" />
+<script type="text/javascript" src="../common/script/jquery.i18n/jquery.i18n.js"></script>
+<script type="text/javascript" src="../common/script/jquery.i18n/jquery.i18n.messagestore.js"></script>
+<link href="../common/script/jqgrid/css/ui.jqgrid.css" rel="stylesheet" />
+<script src="../common/script/jqgrid/js/i18n/grid.locale-vi.js"></script>
+<script src="../common/script/jqgrid/js/jquery.jqGrid.min.js"></script>
+<script type="text/javascript" src="../common/i18n/i18n-his.js"></script>
+<script type="text/javascript" src="../common/i18n/i18n-ngoaitru.js"></script>
+<script type="text/javascript" src="../common/script/UIUtil.js"></script>
+<script type="text/javascript" src="../common/script/moment.min.js"></script>
+<script src="../common/script/common.js"></script>
+<script type="text/javascript" src="../common/script/jquery.priceformat.2.0.min.js"></script>
+<!-- <script type="text/javascript" src="../noitru/DashboardPhoiNoi_TNN.js"></script> -->
+<script type="text/javascript" src="./DashboardPhoiNoi_TNN.js"></script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;600;700;800;900&display=swap"
+    rel="stylesheet">
+<style>
+    :root {
+        --cyan: #00e5ff;
+        --green: #22c55e;
+        --amber: #f59e0b;
+        --red: #ef4444;
+        --purple: #a78bfa;
+        --orange: #f97316;
+        --gold: #fbbf24;
+        --blue: #3b82f6;
+        --muted: #64748b;
+        --text: #e2e8f0;
+        --bg: #07090f;
+        --bg2: #0a1220;
+        --bg3: #0d1728;
+        --border: #1e3a5f;
+    }
+
+    * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+    }
+
+    html,
+    body {
+        height: 100%;
+        background: var(--bg);
+        font-family: 'Be Vietnam Pro', 'Segoe UI', sans-serif;
+        color: var(--text);
+        overflow: hidden;
+    }
+
+    /* HEADER */
+    .hdr {
+        height: 72px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 28px;
+        background: linear-gradient(90deg, #040c1a 0%, #091e3a 40%, #0d2a50 60%, #040c1a 100%);
+        border-bottom: 1px solid var(--border);
+        box-shadow: 0 2px 20px rgba(0, 0, 0, .7);
+        flex-shrink: 0;
+        position: relative;
+    }
+
+    .hdr::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 2px;
+        background: linear-gradient(90deg, transparent 0%, var(--cyan) 30%, var(--blue) 70%, transparent 100%);
+    }
+
+    .hdr-l .so {
+        font-size: 10px;
+        letter-spacing: 3px;
+        color: var(--muted);
+        text-transform: uppercase;
+    }
+
+    .hdr-l .bv {
+        font-size: clamp(16px, 1.5vw, 22px);
+        font-weight: 900;
+        color: var(--cyan);
+        text-shadow: 0 0 18px rgba(0, 229, 255, .35);
+    }
+
+    .hdr-c {
+        text-align: center;
+    }
+
+    .hdr-c .mod {
+        font-size: clamp(20px, 2vw, 26px);
+        font-weight: 900;
+        letter-spacing: 5px;
+        text-transform: uppercase;
+        color: var(--gold);
+        text-shadow: 0 0 18px rgba(251, 191, 36, .35);
+    }
+
+    .hdr-c .sub {
+        font-size: 11px;
+        color: var(--muted);
+        letter-spacing: 3px;
+        margin-top: 2px;
+    }
+
+    .hdr-r {
+        text-align: right;
+    }
+
+    .hdr-r .clk {
+        font-size: clamp(28px, 2.5vw, 42px);
+        font-weight: 900;
+        color: var(--cyan);
+        font-variant-numeric: tabular-nums;
+        letter-spacing: 3px;
+        text-shadow: 0 0 20px rgba(0, 229, 255, .4);
+        line-height: 1;
+    }
+
+    .hdr-r .dt {
+        font-size: 12px;
+        color: var(--muted);
+        margin-top: 3px;
+    }
+
+    /* BODY */
+    .body {
+        display: flex;
+        height: calc(100vh - 72px);
+    }
+
+    /* SIDEBAR */
+    .sidebar {
+        width: clamp(140px, 15vw, 186px);
+        flex-shrink: 0;
+        background: var(--bg2);
+        border-right: 1px solid var(--border);
+        display: flex;
+        flex-direction: column;
+        padding: clamp(6px, 1vh, 12px) 10px;
+        gap: clamp(4px, 1vh, 7px);
+    }
+
+    .sd-date {
+        text-align: center;
+        font-size: 13px;
+        font-weight: 700;
+        color: var(--muted);
+        padding-bottom: 8px;
+        border-bottom: 1px solid var(--border);
+        margin-bottom: 2px;
+    }
+
+    .sc {
+        border-radius: 8px;
+        padding: clamp(4px, 1vh, 10px) 8px;
+        text-align: center;
+        flex-shrink: 1;
+        min-height: 0;
+        border-left: 3px solid currentColor;
+        background: rgba(255, 255, 255, .03);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .sc .sv {
+        font-size: clamp(24px, 5vh, 46px);
+        font-weight: 900;
+        line-height: 1;
+    }
+
+    .sc .sl {
+        font-size: clamp(8px, 1.2vh, 10px);
+        color: var(--muted);
+        margin-top: clamp(1px, 0.5vh, 3px);
+        text-transform: uppercase;
+        letter-spacing: .7px;
+        font-weight: 600;
+    }
+
+    .sc-hd {
+        color: var(--cyan)
+    }
+
+    .sc-bh {
+        color: #60a5fa
+    }
+
+    .sc-vp {
+        color: var(--purple)
+    }
+
+    .sc-nv {
+        color: var(--green)
+    }
+
+    .sc-xv {
+        color: var(--amber)
+    }
+
+    .sc-cv {
+        color: var(--orange)
+    }
+
+    .sc-tv {
+        color: var(--red)
+    }
+
+    /* MAIN */
+    .main {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+    }
+
+    .bar {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 8px 20px;
+        background: var(--bg3);
+        border-bottom: 1px solid var(--border);
+        flex-shrink: 0;
+    }
+
+    .bar label {
+        font-size: 13px;
+        color: var(--muted);
+    }
+
+    .bar input {
+        background: var(--bg);
+        border: 1px solid var(--border);
+        color: var(--text);
+        border-radius: 6px;
+        padding: 5px 10px;
+        font-size: 14px;
+        width: 110px;
+        font-family: inherit;
+    }
+
+    .bar input:focus {
+        outline: none;
+        border-color: var(--blue);
+    }
+
+    .btn {
+        padding: 5px 14px;
+        border: none;
+        border-radius: 6px;
+        font-size: 13px;
+        font-weight: 700;
+        cursor: pointer;
+        font-family: inherit;
+        transition: all .15s;
+    }
+
+    .bp {
+        background: #1d4ed8;
+        color: #fff
+    }
+
+    .bp:hover {
+        background: #2563eb
+    }
+
+    .bo {
+        background: var(--bg);
+        color: #94a3b8;
+        border: 1px solid var(--border)
+    }
+
+    .bo:hover,
+    .bo.on {
+        background: #1d4ed8;
+        color: #fff;
+        border-color: #3b82f6
+    }
+
+    .spc {
+        flex: 1
+    }
+
+    .upd {
+        font-size: 13px;
+        color: #ffffff;
+        font-weight: 700;
+    }
+
+    /* TABLE */
+    .tbl-wrap {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+    }
+
+    table {
+        width: 100%;
+        height: 100%;
+        border-collapse: collapse;
+    }
+
+    thead tr.h1 th {
+        background: #08192e;
+        color: var(--muted);
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        padding: 10px 0;
+        text-align: center;
+        border-bottom: 1px solid var(--border);
+    }
+
+    thead tr.h1 th.th-khoa {
+        text-align: left;
+        padding-left: 24px;
+    }
+
+    thead tr.h2 th {
+        background: #0a1e36;
+        border-bottom: 2px solid var(--border);
+        padding: 12px 10px;
+        text-align: center;
+        font-size: 13px;
+        font-weight: 700;
+        white-space: nowrap;
+        position: sticky;
+        top: 0;
+        z-index: 2;
+    }
+
+    thead tr.h2 th.th-khoa {
+        text-align: left;
+        padding-left: 24px;
+        color: #7cb9e8;
+        min-width: 210px;
+    }
+
+    thead tr.h2 th.th-hd {
+        color: var(--cyan);
+        font-size: 14px;
+    }
+
+    thead tr.h2 th.th-bh {
+        color: #60a5fa;
+    }
+
+    thead tr.h2 th.th-vp {
+        color: var(--purple);
+    }
+
+    thead tr.h2 th.th-nv {
+        color: var(--green);
+    }
+
+    thead tr.h2 th.th-xv {
+        color: var(--amber);
+    }
+
+    .g-hd {
+        border-left: 2px solid rgba(0, 229, 255, .4) !important
+    }
+
+    .g-nv {
+        border-left: 2px solid rgba(34, 197, 94, .4) !important
+    }
+
+    .g-xv {
+        border-left: 2px solid rgba(245, 158, 11, .4) !important
+    }
+
+    tbody tr.dr td {
+        padding: 0 10px;
+        border-bottom: 1px solid #0f1e30;
+        text-align: center;
+        vertical-align: middle;
+    }
+
+    tbody tr.dr:nth-child(odd) td {
+        background: #080f1c
+    }
+
+    tbody tr.dr:nth-child(even) td {
+        background: #0a1525
+    }
+
+    tbody tr.dr:hover td {
+        background: #0f2035 !important;
+        transition: background .15s
+    }
+
+    td.td-k {
+        text-align: left !important;
+        padding-left: 24px !important
+    }
+
+    td.td-k .ma {
+        font-size: 11px;
+        color: var(--muted);
+        display: block;
+        margin-bottom: 3px;
+        letter-spacing: 1px
+    }
+
+    td.td-k .tn {
+        font-size: 17px;
+        font-weight: 800;
+        color: var(--text)
+    }
+
+    .num {
+        font-size: clamp(20px, min(4.5vw, 6vh), 52px);
+        font-weight: 900;
+        line-height: 1;
+        letter-spacing: -1px;
+        display: block
+    }
+
+    .n-hd {
+        color: var(--cyan);
+        text-shadow: 0 0 14px rgba(0, 229, 255, .25)
+    }
+
+    .n-bh {
+        color: #60a5fa;
+        font-size: clamp(16px, min(3.8vw, 5.5vh), 44px)
+    }
+
+    .n-vp {
+        color: var(--purple);
+        font-size: clamp(16px, min(3.8vw, 5.5vh), 44px)
+    }
+
+    .n-nv {
+        color: var(--green);
+        text-shadow: 0 0 14px rgba(34, 197, 94, .25)
+    }
+
+    .n-xv {
+        color: var(--amber);
+        text-shadow: 0 0 14px rgba(245, 158, 11, .25)
+    }
+
+    tbody tr.tr-tot td {
+        background: #081624 !important;
+        border-top: 2px solid rgba(251, 191, 36, .35);
+        border-bottom: none;
+        padding: 0 10px;
+        height: clamp(50px, 10vh, 80px);
+        /* Cho phép nhỏ xuống khi chiều cao thấp */
+        text-align: center;
+        vertical-align: middle
+    }
+
+    tbody tr.tr-tot td.td-k .tn {
+        color: var(--gold);
+        font-size: 16px;
+        letter-spacing: 2px;
+        text-transform: uppercase
+    }
+
+    tbody tr.tr-tot .num {
+        color: var(--gold);
+        font-size: clamp(24px, min(5vw, 7vh), 56px);
+        text-shadow: 0 0 18px rgba(251, 191, 36, .3)
+    }
+
+    tbody tr.tr-tot .n-bh {
+        color: #93c5fd;
+        font-size: clamp(20px, min(4.2vw, 6vh), 48px)
+    }
+
+    tbody tr.tr-tot .n-vp {
+        color: #c4b5fd;
+        font-size: clamp(20px, min(4.2vw, 6vh), 48px)
+    }
+
+    tbody tr.tr-tot .n-nv {
+        color: #86efac;
+        font-size: clamp(20px, min(4.2vw, 6vh), 48px)
+    }
+
+    tbody tr.tr-tot .n-xv {
+        color: #fde68a;
+        font-size: clamp(20px, min(4.2vw, 6vh), 48px)
+    }
+
+    ::-webkit-scrollbar {
+        width: 5px
+    }
+
+    ::-webkit-scrollbar-track {
+        background: transparent
+    }
+
+    ::-webkit-scrollbar-thumb {
+        background: var(--border);
+        border-radius: 3px
+    }
+
+    body .t-bar-child {
+        cursor: pointer;
+    }
+
+    body .t-ignore-click {
+        pointer-events: none;
+    }
+
+    .t-selected {
+        background-color: #313131;
+    }
+</style>
+
+<!-- HEADER -->
+<div class="hdr">
+    <div class="hdr-l">
+        <div class="so">Sở Y tế Thái Nguyên</div>
+        <div class="bv">Bệnh viện Phổi Thái Nguyên</div>
+    </div>
+    <div class="hdr-c">
+        <div class="mod">Thông Tin Bệnh Nhân Nội Trú</div>
+        <div class="sub">Quản lý bệnh nhân theo khoa · Cập nhật theo thời gian thực</div>
+    </div>
+    <div class="hdr-r">
+        <div class="clk" id="txtClock">00:00:00</div>
+        <div class="dt" id="txtDate"></div>
+    </div>
+</div>
+
+<div class="body">
+    <div class="t-bar" style="width: 20%; display: flex; flex-direction: column;">
+        <div t-value="0" class="sc sc-nv t-bar-child t-bar-kb t-selected" style="height: 25%;">
+            <div class="sv t-ignore-click">Khám bệnh</div>
+        </div>
+        <div t-value="1" class="sc sc-hd t-bar-child t-bar-ntu" style="height: 25%;">
+            <div class="sv t-ignore-click">Nội trú</div>
+        </div>
+        <div t-value="2" class="sc sc-vp t-bar-child t-bar-dv" style="height: 25%;">
+            <div class="sv t-ignore-click">Dịch vụ</div>
+        </div>
+        <div t-value="3" class="sc sc-tv t-bar-child t-bar-tntt" style="height: 25%;">
+            <div class="sv t-ignore-click">Tai nạn, TT</div>
+        </div>
+    </div>
+    <div class="t-detail" style="width: 80%; display: flex;">
+        <div class="sidebar">
+                <div class="sd-date" id="sDate">--/--/----</div>
+                <div class="sc sc-hd">
+                    <div class="sv" id="sHD">--</div>
+                    <div class="sl">Tổng lượt khám</div>
+                </div>
+                <div class="sc sc-hd">
+                    <div class="sv" id="sHD">--</div>
+                    <div class="sl">Tổng bệnh nhân</div>
+                </div>
+                <div class="sc sc-hd">
+                    <div class="sv" id="sHD">--</div>
+                    <div class="sl">Bệnh nhân mới</div>
+                </div>
+                <div class="sc sc-bh">
+                    <div class="sv" id="sBH">--</div>
+                    <div class="sl">Bệnh nhân BHYT</div>
+                </div>
+                <div class="sc sc-vp">
+                    <div class="sv" id="sVP">--</div>
+                    <div class="sl">Khám cấp cứu</div>
+                </div>
+                <div class="sc sc-nv">
+                    <div class="sv" id="sNV">--</div>
+                    <div class="sl">Nhập viện</div>
+                </div>
+                <!-- <div class="sc sc-xv">
+                    <div class="sv" id="sXV">--</div>
+                    <div class="sl">Xuất viện</div>
+                </div> -->
+                <div class="sc sc-cv">
+                    <div class="sv" id="sCV">--</div>
+                    <div class="sl">Chuyển viện</div>
+                </div>
+                <div class="sc sc-tv">
+                    <div class="sv" id="sTV">--</div>
+                    <div class="sl">Tử vong</div>
+                </div>
+            </div>
+
+        <div class="main">
+            <div class="bar">
+                <label>&#128197;</label>
+                <input type="text" id="txtNgay" placeholder="dd/mm/yyyy" />
+                <button class="btn bp" id="btnSearch">Xem</button>
+                <button class="btn bo on" id="btnToday">Hôm nay</button>
+                <button class="btn bo" id="btnYesterday">Hôm qua</button>
+                <div class="spc"></div>
+                <span class="upd" id="lastUpd"></span>
+            </div>
+            <div class="tbl-wrap">
+                <table>
+                    <thead>
+                        <tr class="h1">
+                            <th class="th-khoa" rowspan="2" style="vertical-align:middle">Khoa phòng</th>
+                            <th colspan="3" class="g-hd">Hiện diện</th>
+                            <th colspan="1" class="g-nv">Nhập</th>
+                            <th colspan="1" class="g-xv">Xuất</th>
+                        </tr>
+                        <tr class="h2">
+                            <th class="th-hd g-hd">Đang điều trị</th>
+                            <th class="th-bh">BHYT</th>
+                            <th class="th-vp">Viện phí</th>
+                            <th class="th-nv g-nv">Nhập khoa</th>
+                            <th class="th-xv g-xv">Xuất khoa</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tblNoiTru">
+                        <tr>
+                            <td colspan="6" style="text-align:center;padding:50px;color:var(--muted)">Đang tải...</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    
+</div>
+
+<script>
+    var hospital_id = "{hospital_id}", user_id = "{user_id}", user_type = "{user_type}", province_id = "{province_id}", uuid = "{uuid}";
+    // initRest(uuid, "/vnpthis");
+    var DS = new DashboardNoiTru2({ _param: [hospital_id, user_id, user_type, province_id], _uuid: uuid });
+    DS.load();
+</script>
